@@ -1,7 +1,7 @@
-.. _dtp_cp_project_parameterestimation:
+.. _dtp_cp_project_bondgraphs:
 
 Project: Bond Graph
-=============================
+===================
 
 This project was created as part of the Computational Physiology module in the `MedTech CoRE 
 <http://medtech.org.nz>`_ Doctoral Training Programme. 

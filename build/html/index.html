@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Project: Bond Graph &#8212; DTP Computational Physiology - Parameter Estimation project 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="DTP Computational Physiology - Parameter Estimation project 1.0 documentation" href="#" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="project-bond-graph">
+<span id="dtp-cp-project-bondgraphs"></span><h1>Project: Bond Graph<a class="headerlink" href="#project-bond-graph" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The bond graph approach to formulating models dealing with mass and energy transfer was developed by Henry Paynter in the 1960s to represent electro-mechanical control systems <a href="#id1"><span class="problematic" id="id2">:cite:`paynter1961analysis`</span></a>. It was later extended to include chemical processes by <a href="#id3"><span class="problematic" id="id4">:cite:`breedveld1984physical`</span></a>, including concepts from the theory of network thermodynamics by Aharon Katchalsky and colleagues <a href="#id5"><span class="problematic" id="id6">:cite:`oster1971network`</span></a>. Papers by Peter Gawthrop and Edmund Crampin have brought the approach into the bioengineering domain <a href="#id7"><span class="problematic" id="id8">:cite:`gawthrop2014energy,gawthrop2015hierarchical,gawthrop2015energetic,gawthrop2016modular`</span></a>.</p>
+<p>The first key idea, based on recognising that energy and power are the only quantities that are common across different physical systems, is to separate energy transmission from storage and dissipation, and to provide the concept of <em>potential</em> (called &#8220;effort&#8221; in the engineering literature) with units of Joules per some_quantity as the common driving force behind the <em>flow</em> of that some_quantity per second. The product of potential and flow is then always power in units of Joules per second. The &#8220;some_quantity&#8221; has units of metres, meters<sup>3</sup>, coulombs, candela, moles or entropy for, respectively, rigid body mechanics, continuum mechanics (including fluid flow), electrical, electromagnetic, chemical and heat transfer processes. As explained further below, the second key concept is that of a <em>0-junction</em>, where potential is defined and mass balance is applied, and a <em>1-junction</em>, where flow is defined and energy balance is applied. The extraordinary utility of these concepts is to recognise that Kirchhoff&#8217;s voltage law in electrical circuits, Newton&#8217;s force balance in a mechanical system, and stoichiometric balance in a biochemical system, are all just different manifestations of the same underlying principle of energy conservation and can therefore be represented by the same bond graph equation.</p>
+</div>
+<div class="section" id="units">
+<h2>Units<a class="headerlink" href="#units" title="Permalink to this headline">¶</a></h2>
+<p>Many physical systems can be described by a driving <em>potential</em> expressed as Joules per unit of some quantity, and a <em>flow</em> expressed as that quantity per second. The quantity could be coulomb, meters, moles, <em>etc.</em> in different physical systems. The power is always the product of the driving force and the flow expressed as Joules per second. The seven units of the SI system under the newly proposed definitions are now based on constants that are consistent with the use of Joules and seconds (together covering energy and power), metres, moles, entropy, coulombs and candela. Table~ref{units} displays the bond graph concepts in the fluid mechanics domain.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="15%" />
+<col width="15%" />
+<col width="16%" />
+<col width="17%" />
+<col width="15%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">&nbsp;</th>
+<th class="head">Electrical Circuit</th>
+<th class="head">Solid Mechanics</th>
+<th class="head">Fluid Mechanics</th>
+<th class="head">Biochemical Reaction</th>
+<th class="head">HeatFlow</th>
+<th class="head">Electro-magnetics</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Potential</td>
+<td>J.C <sup>-1</sup> (V)</td>
+<td>J.m <sup>-1</sup> (N)</td>
+<td>J.m <sup>-3</sup> (Pa)</td>
+<td>J.mol <sup>-1</sup> (G)</td>
+<td>J.e <sup>-1</sup> (K)</td>
+<td>J.cd <sup>-1</sup></td>
+</tr>
+<tr class="row-odd"><td>Quantity</td>
+<td>C</td>
+<td>m</td>
+<td>m <sup>3</sup></td>
+<td>mol</td>
+<td>e</td>
+<td>cd</td>
+</tr>
+<tr class="row-even"><td>Flow</td>
+<td>C.s <sup>-1</sup></td>
+<td>m.s <sup>-1</sup></td>
+<td>m <sup>3</sup>.s <sup>-1</sup></td>
+<td>mol.s <sup>-1</sup></td>
+<td>e.s <sup>-1</sup></td>
+<td>cd.s <sup>-1</sup></td>
+</tr>
+<tr class="row-odd"><td>Momentum</td>
+<td>J.s.C <sup>-1</sup></td>
+<td>J.s.m <sup>-1</sup></td>
+<td>J.s.m <sup>-3</sup></td>
+<td>J.s.mol <sup>-1</sup></td>
+<td>J.s.e <sup>-1</sup></td>
+<td>J.s.cd <sup>-1</sup></td>
+</tr>
+<tr class="row-even"><td>Compliance</td>
+<td>C <sup>2</sup>.J <sup>-1</sup></td>
+<td>m <sup>2</sup>.J <sup>-1</sup></td>
+<td>m <sup>6</sup>.J <sup>-1</sup></td>
+<td>mol <sup>2</sup>.J <sup>-1</sup></td>
+<td>e <sup>2</sup>.J <sup>-1</sup></td>
+<td>cd <sup>2</sup>.J <sup>-1</sup></td>
+</tr>
+<tr class="row-odd"><td>Resistance</td>
+<td>J.s.C <sup>-2</sup></td>
+<td>J.s.m <sup>-2</sup></td>
+<td>J.s.m <sup>-6</sup></td>
+<td>J.s.mol <sup>-2</sup></td>
+<td>J.s.e <sup>-2</sup></td>
+<td>J.s.cd <sup>-2</sup></td>
+</tr>
+<tr class="row-even"><td>Inductance</td>
+<td>J.s <sup>2</sup>.C <sup>-2</sup></td>
+<td>J.s <sup>2</sup>.m <sup>-2</sup></td>
+<td>J.s <sup>2</sup>.m <sup>-6</sup></td>
+<td>J.s <sup>2</sup>.mol <sup>-2</sup></td>
+<td>J.s <sup>2</sup>.e <sup>-2</sup></td>
+<td>J.s <sup>2</sup>.cd <sup>-2</sup></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="formulation">
+<h2>Formulation<a class="headerlink" href="#formulation" title="Permalink to this headline">¶</a></h2>
+<p>In bond graph formulation, there are four basic variables. These variables for different physical systems are listed in . In electrical engineering these variables are given by: potential <span class="math">\(\mu\)</span> is energy density or <cite>voltage</cite> (J.C <sup>-1</sup>), flow <span class="math">\(\upsilon\)</span> is <cite>current</cite> (C.s <sup>-1</sup>), time integral of potential <span class="math">\(p\)</span> is <cite>momentum</cite> (J.s.C <sup>-1</sup>) and time integral of flow <span class="math">\(q\)</span> is quantity or <cite>coulombs</cite> (C). Product <span class="math">\(\mu .\upsilon\)</span> is power (J.s <sup>-1</sup>) which is a generalised coordinate to model the complete systems residing in several energy domains. A bond with covariables <span class="math">\(\mu\)</span> and <span class="math">\(\upsilon\)</span> is therefore used to represent <cite>transmission of energy</cite>. The bond represents a mechanism for the transmission of energy and power, and the arrow head indicates the assumed direction of power flow (see <a class="reference internal" href="#fig-dtp-cp-bondgraphproject-bond"><span class="std std-numref">Fig. 1</span></a>). The flow <span class="math">\(\upsilon\)</span> and potential <span class="math">\(\mu\)</span> must satisfy conservation laws.</p>
+<div class="figure align-center" id="id9">
+<span id="fig-dtp-cp-bondgraphproject-bond"></span><a class="reference internal image-reference" href="_images/bond.png"><img alt="_images/bond.png" src="_images/bond.png" style="width: 25%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Representation of energy bond.</span></p>
+</div>
+<p>There are also the concept of <cite>0-junction</cite> and <cite>1-junction</cite> for conservation laws. The <cite>0-junction</cite> defines a common potential <span class="math">\(\mu\)</span> which ensures that the potential is identical at each port and imposes mass conservation constraint based on <span class="math">\(\upsilon\)</span>. The <cite>1-junction</cite> defines a common flow <span class="math">\(\upsilon\)</span> which ensures that the flow is identical at each port and imposes energy conservation constraint based on <span class="math">\(\mu\)</span>. Since sum of the flows is zero with <span class="math">\(\mu\)</span> constant for <cite>0-junction</cite> and sum of the potentials is zero with <span class="math">\(\upsilon\)</span> constant for <cite>1-junction</cite>, the transmission of power through junction is conserved for both kinds of junctions, that is:</p>
+<div class="math">
+\[\sum \mu. \upsilon=0\]</div>
+</div>
+<div class="section" id="bond-graph-elements">
+<h2>Bond Graph elements<a class="headerlink" href="#bond-graph-elements" title="Permalink to this headline">¶</a></h2>
+<p>Bond graph formulation is a graphical notation for the set of linear constraint equations (the conservation laws), but the constitutive relations (to be addressed next) can be nonlinear.</p>
+<div class="section" id="r-element">
+<h3><cite>R-element</cite><a class="headerlink" href="#r-element" title="Permalink to this headline">¶</a></h3>
+<p>Energy <span class="math">\(\mu\)</span> can be dissipated by a resistor <cite>R</cite> in proportion to the flow <span class="math">\(\upsilon\)</span> with an empirical relation which can be a simple linear relation such as Equation 2 or a complex nonlinear relation:</p>
+<div class="math">
+\[\mu=\upsilon R\]</div>
+</div>
+<div class="section" id="c-element">
+<h3><cite>C-element</cite><a class="headerlink" href="#c-element" title="Permalink to this headline">¶</a></h3>
+<p>Energy <span class="math">\(\mu\)</span> can be stored statically by a capacitor <cite>C</cite> without any loss. In the bond graph terminology, a one-port capacitor relates energy to the quantity <cite>q</cite> or time integral of flow by an empirical relation such as Equation 4. The <cite>C-element</cite> stores <cite>q</cite> by accumulating the net flow <span class="math">\(\upsilon\)</span> to the storage element:</p>
+<div class="math">
+\[\mu=\dfrac{q}{C}\]</div>
+<div class="math">
+\[\dot q=\upsilon\]</div>
+</div>
+<div class="section" id="i-element">
+<h3><cite>I-element</cite><a class="headerlink" href="#i-element" title="Permalink to this headline">¶</a></h3>
+<p>Energy <span class="math">\(\mu\)</span> can be stored dynamically by an inductor <cite>I</cite> without any loss. In bond graph formulation, a one-port inductor relates flow to the momentum <cite>p</cite> or time integral of potential by an empirical relation such as Equation 7. The <cite>I-element</cite> stores <cite>p</cite> by accumulating the net potential <span class="math">\(\mu\)</span> to the storage element.</p>
+<div class="math">
+\[\upsilon=\dfrac{p}{I}\]</div>
+<div class="math">
+\[\dot p=\mu\]</div>
+<p><a class="reference internal" href="#fig-dtp-cp-bondgraphproject-tetra"><span class="std std-numref">Fig. 2</span></a> shows the relation of the state variables to the constitutive relations.</p>
+<div class="figure align-center" id="id10">
+<span id="fig-dtp-cp-bondgraphproject-tetra"></span><a class="reference internal image-reference" href="_images/tetrahedron.png"><img alt="_images/tetrahedron.png" src="_images/tetrahedron.png" style="width: 25%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">State variables and constitutive relations in the bond graph approach.</span></p>
+</div>
+</div>
+<div class="section" id="causality">
+<h3>Causality<a class="headerlink" href="#causality" title="Permalink to this headline">¶</a></h3>
+<p>Causality establishes the cause and the effect relationship. It specifically implies that either the potential or flow variable on that bond is known. Causality is generally indicated by a causal stroke at the end to which the potential receiver is connected. Elements which store or dissipate energy do not impose causality on the system, but they have preferred causality for computational reasons. These elements with their preferred causality are shown in <a class="reference internal" href="#fig-dtp-cp-bondgraphproject-causality-element"><span class="std std-numref">Fig. 3</span></a>.</p>
+<div class="figure align-center" id="id11">
+<span id="fig-dtp-cp-bondgraphproject-causality-element"></span><a class="reference internal image-reference" href="_images/causality_element.png"><img alt="_images/causality_element.png" src="_images/causality_element.png" style="width: 25%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">Preferred causality for <cite>R</cite>, <cite>C</cite>, and <cite>I</cite> elements.</span></p>
+</div>
+<p>In the bond graph approach, junctions interconnect the corresponding elements and constrain the possible causalities of the element ports connected to it. A <cite>0-junction</cite> can only have one potential output. In a similar way, a <cite>1-junction</cite> can only have one flow output. <a class="reference internal" href="#fig-dtp-cp-bondgraphproject-causality-jun"><span class="std std-numref">Fig. 4</span></a> illustrates causality in four-port <cite>0-junction</cite> and <cite>1-junction</cite>.</p>
+<div class="figure align-center" id="id12">
+<span id="fig-dtp-cp-bondgraphproject-causality-jun"></span><a class="reference internal image-reference" href="_images/causality_jun.png"><img alt="_images/causality_jun.png" src="_images/causality_jun.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Causality in four-port <cite>0-junction</cite> and <cite>1-junction</cite>.</span></p>
+</div>
+<p>This project was created as part of the Computational Physiology module in the <a class="reference external" href="http://medtech.org.nz">MedTech CoRE</a> Doctoral Training Programme.</p>
+<p>This project requires you to put together what you have learned in the tutorials to define a complete workflow which will create the Hill muscle model using the Bond Graph technique to simulate the human gait motion.</p>
+</div>
+</div>
+<div class="section" id="outline">
+<h2>Outline<a class="headerlink" href="#outline" title="Permalink to this headline">¶</a></h2>
+<p>The Hill muscle model showed in <a class="reference internal" href="#fig-dtp-cp-bondgraphproject-mechanical"><span class="std std-numref">Fig. 5</span></a> can be represented with the Bond Graph technique using <em>1</em>-junction for common velocity point, <em>0</em>-junction for common force point, a tension source <em>SE</em> for the contractile tension, a resistor <em>R</em> for the mechanical damper, two capacitors <em>C</em> for springs, and a mass <em>I</em> representing the muscle mass.</p>
+<p>In this project we create the Hill muscle model using the Bond Graph technique.</p>
+<div class="figure align-center" id="id13">
+<span id="fig-dtp-cp-bondgraphproject-mechanical"></span><a class="reference internal image-reference" href="_images/mechanical-model.png"><img alt="_images/mechanical-model.png" src="_images/mechanical-model.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">The Hill model with five basic elements: contractile element, <em>CE</em>; damping element, <span class="math">\(R_{1}\)</span>; series elastic element, <span class="math">\(C_{1}\)</span>; parallel elastic element, <span class="math">\(C_{2}\)</span>; and inertial element, <span class="math">\(I_{1}\)</span>.</span></p>
+</div>
+</div>
+<div class="section" id="tips-for-completing-the-project">
+<h2>Tips for completing the project<a class="headerlink" href="#tips-for-completing-the-project" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><em>Junctions:</em> <em>1</em>-junction and <em>0</em>-junction are the fundamental elements for building Bond Graph models from schematics. By identifying the junctions in the schematic we can come up with the network topology, which helps us to plug in the rest of the elements to the model.</li>
+<li><em>Contractile element:</em> The contractile element <em>CE</em> is the <strong>active</strong> element in an extrafusal motor unit. It corresponds to the role played by voltage in an electronic circuit. <em>CE</em> responds to motoneuron inputs by contracting. Thus, the tension <em>SE</em> that it produces always acts to try to shorten the muscle. <em>CE</em> is incapable to produce an extension force. Here, we assume the force is constant with given value of <span class="math">\(1\)</span> <em>J.m</em><sup>-1</sup>.</li>
+<li><em>Elastic elements:</em> A muscle when passively stretched exhibits an elastic restoring force that tends to return the muscle to its original length. In part this force is due to stretching the connective tissue that surrounds the muscle fibers. In part it may be due to stretching the tendons which terminate muscle tissue and attach it to the bone. There is a reason to believe that the muscle fibers themselves are at least partly elastic. It is this elastic restoring force that is represented by the elastic elements (springs) in the Hill model. It is not completely correct to assign these elements to any particular physical source, but we may regard the <span class="math">\(C_{1}\)</span> as being mostly due to the connective tissues and the <span class="math">\(C_{2}\)</span> as being primarily dominated by tendon fibers terminating specific motor units. We should note that <span class="math">\(C_{1}\)</span> and <span class="math">\(C_{2}\)</span> are functions of lengths and therefore are non-linear springs. However, in this project we assume they are constants with given value of <span class="math">\(20\)</span> <em>J.m</em><sup>-2</sup>.</li>
+<li><em>Damping element:</em> It is an empirical factor that muscle tension during contraction and the speed of the contraction are coupled to each other. Hill found that the relation between them follows a characteristic hyperbolic equation, now known as Hill&#8217;s equation. Similar to elastic elements, the damper coefficient <span class="math">\(R_{1}\)</span> is a function of the contraction speed, therefore is a nonlinear damper. However, in here we assume it is constant with given value of <span class="math">\(10\)</span> <em>J.s.m</em><sup>-2</sup>.</li>
+<li><em>Inertial element:</em> This element is representing the muscle mass. Here, we assume it is <span class="math">\(1\)</span> <em>J.s</em><sup>2</sup> <em>.m</em><sup>-2</sup>.</li>
+</ul>
+<p>The full Bond Graph muscle model is shown in <a class="reference internal" href="#fig-dtp-cp-bondgraphproject-bondgraph"><span class="std std-numref">Fig. 6</span></a>.</p>
+<div class="figure align-center" id="id14">
+<span id="fig-dtp-cp-bondgraphproject-bondgraph"></span><a class="reference internal image-reference" href="_images/bondgraph.png"><img alt="_images/bondgraph.png" src="_images/bondgraph.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">Full Bond Graph muscle model.</span></p>
+</div>
+</div>
+<div class="section" id="simulation">
+<h2>Simulation<a class="headerlink" href="#simulation" title="Permalink to this headline">¶</a></h2>
+<p>Using the Bond Graph model, now we can derive the equations and implement them in OpenCOR. The equations that we are looking for are: conservation of flow for <em>0</em>-junctions, conservation of energy for <em>1</em>-junctions, and constitutive relations for the springs, the damper and the mass. The input boundary condition for solving this system of ODEs is the contractile element or <em>SE</em> in the Bond Graph model. By running the simulation, you would be able to plot the force, velocity and displacement for the muscle in time.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Project: Bond Graph</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#units">Units</a></li>
+<li><a class="reference internal" href="#formulation">Formulation</a></li>
+<li><a class="reference internal" href="#bond-graph-elements">Bond Graph elements</a><ul>
+<li><a class="reference internal" href="#r-element"><cite>R-element</cite></a></li>
+<li><a class="reference internal" href="#c-element"><cite>C-element</cite></a></li>
+<li><a class="reference internal" href="#i-element"><cite>I-element</cite></a></li>
+<li><a class="reference internal" href="#causality">Causality</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#outline">Outline</a></li>
+<li><a class="reference internal" href="#tips-for-completing-the-project">Tips for completing the project</a></li>
+<li><a class="reference internal" href="#simulation">Simulation</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, University of Auckland.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.8</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/index.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -52,12 +52,12 @@ There are also the concept of `0-junction` and `1-junction` for conservation law
 
    \sum \mu. \upsilon=0
 
-Bond Graph elements
+Bond graph elements
 -------------------
 
 Bond graph formulation is a graphical notation for the set of linear constraint equations (the conservation laws), but the constitutive relations (to be addressed next) can be nonlinear.
 
-`R-element`
+`Resistors`
 ~~~~~~~~~~~
 
 Energy :math:`\mu` can be dissipated by a resistor `R` in proportion to the flow :math:`\upsilon` with an empirical relation which can be a simple linear relation such as Equation 2 or a complex nonlinear relation:
@@ -66,8 +66,8 @@ Energy :math:`\mu` can be dissipated by a resistor `R` in proportion to the flow
 
    \mu=\upsilon R
 
-`C-element`
-~~~~~~~~~~~
+`Storage elements`
+~~~~~~~~~~~~~~~~~~
 
 Energy :math:`\mu` can be stored statically by a capacitor `C` without any loss. In the bond graph terminology, a one-port capacitor relates energy to the quantity `q` or time integral of flow by an empirical relation such as Equation 4. The `C-element` stores `q` by accumulating the net flow :math:`\upsilon` to the storage element:
 
@@ -126,55 +126,91 @@ In the bond graph approach, junctions interconnect the corresponding elements an
 
    Causality in four-port `0-junction` and `1-junction`.
 
-
-This project was created as part of the Computational Physiology module in the `MedTech CoRE <http://medtech.org.nz>`_ Doctoral Training Programme.
-
-This project requires you to put together what you have learned in the tutorials to define a complete workflow which will create the Hill muscle model using the Bond Graph technique to simulate the human gait motion.
-
-Outline
--------
-
-The Hill muscle model showed in :numref:`fig_dtp_cp_bondgraphproject_mechanical` can be represented with the Bond Graph technique using *1*-junction for common velocity point, *0*-junction for common force point, a tension source *SE* for the contractile tension, a resistor *R* for the mechanical damper, two capacitors *C* for springs, and a mass *I* representing the muscle mass.
-
-In this project we create the Hill muscle model using the Bond Graph technique.
-
-.. _fig_dtp_cp_bondgraphproject_mechanical:
-
-.. figure:: _static/mechanical-model.png
-   :align: center
-   :width: 50%
-
-   The Hill model with five basic elements: contractile element, *CE*; damping element, :math:`R_{1}`; series elastic element, :math:`C_{1}`; parallel elastic element, :math:`C_{2}`; and inertial element, :math:`I_{1}`.
-
-
-Tips for completing the project
--------------------------------
-* *Junctions:* *1*-junction and *0*-junction are the fundamental elements for building Bond Graph models from schematics. By identifying the junctions in the schematic we can come up with the network topology, which helps us to plug in the rest of the elements to the model.
-
-* *Contractile element:* The contractile element *CE* is the **active** element in an extrafusal motor unit. It corresponds to the role played by voltage in an electronic circuit. *CE* responds to motoneuron inputs by contracting. Thus, the tension *SE* that it produces always acts to try to shorten the muscle. *CE* is incapable to produce an extension force. Here, we assume the force is constant with given value of :math:`1` *J.m*\ :sup:`-1`.
-
-* *Elastic elements:* A muscle when passively stretched exhibits an elastic restoring force that tends to return the muscle to its original length. In part this force is due to stretching the connective tissue that surrounds the muscle fibers. In part it may be due to stretching the tendons which terminate muscle tissue and attach it to the bone. There is a reason to believe that the muscle fibers themselves are at least partly elastic. It is this elastic restoring force that is represented by the elastic elements (springs) in the Hill model. It is not completely correct to assign these elements to any particular physical source, but we may regard the :math:`C_{1}` as being mostly due to the connective tissues and the :math:`C_{2}` as being primarily dominated by tendon fibers terminating specific motor units. We should note that :math:`C_{1}` and :math:`C_{2}` are functions of lengths and therefore are non-linear springs. However, in this project we assume they are constants with given value of :math:`20` *J.m*\ :sup:`-2`.
-
-* *Damping element:* It is an empirical factor that muscle tension during contraction and the speed of the contraction are coupled to each other. Hill found that the relation between them follows a characteristic hyperbolic equation, now known as Hill's equation. Similar to elastic elements, the damper coefficient :math:`R_{1}` is a function of the contraction speed, therefore is a nonlinear damper. However, in here we assume it is constant with given value of :math:`10` *J.s.m*\ :sup:`-2`.
-
-* *Inertial element:* This element is representing the muscle mass. Here, we assume it is :math:`1` *J.s*\ :sup:`2` *.m*\ :sup:`-2`.
-
 The full Bond Graph muscle model is shown in :numref:`fig_dtp_cp_bondgraphproject_bondgraph`.
 
 .. _fig_dtp_cp_bondgraphproject_bondgraph:
 
 .. figure:: _static/bondgraph.png
+    :align: center
+    :width: 50%
+
+    Full bond graph model.
+
+
+This project was created as part of the Computational Physiology module in the `MedTech CoRE <http://medtech.org.nz>`_ Doctoral Training Programme.
+
+This project requires you to put together what you have learned in the tutorials to define a complete workflow which will create the Hoisting device model using the Bond graph technique.
+
+Procedure
+---------
+
+To generate a bond graph model starting from an ideal-physical model, a systematic method exist, which we will present here as a procedure. This procedure consists roughly of the identification of the domains and basic elements, the generation of the connection structure (called the junction structure), the placement of the elements, and possibly simplifying the graph. The procedure is different for the mechanical domain compared to the other domains. These differences are indicated between parenthesis. The reason is that elements need to be connected to difference variables or across variables. The potentials in the non-mechanical domains and the flows in the mechanical domains are the across variables we need.
+
+Step 1 and 2 concern the identification of the domains and elements.
+
+1. Determine which physical domains exist in the system and identify all basic elements like *C*, *I*, *R*, *SE*, *SF*, *TF* and *GY*. Give every element a unique name to distinguish them from each other.
+
+2. Indicate in the ideal-physical model per domain a reference potential (reference flow with positive direction for the mechanical domains). Note that only the references in the mechanical domains have a direction.
+
+Steps 3 through 6 describe the generation of the connection structure (called the junction structure).
+
+3. Identify all other potentials (mechanical domains: flows) and give them unique names.
+
+4. Draw these potentials (mechanical: flows), and not the references, graphically by `0-junctions` (mechanical: `1-junctions`). Keep if possible, the same layout as the IPM.
+
+5. Identify all potential differences (mechanical: flow differences) needed to connect the ports of all elements enumerated in step 1 to the junction structure. Give these differences a unique name, preferably showing the difference nature. The difference between  :math:`\mu`:sub:`1` and :math:`\mu`:sub:`2` can be indicated by :math:`\mu` :sub:`12`.
+
+6. Construct the potential differences using a `1-junction` (mechanical: flow differences with a `0-junction`) according to Figure 17, and draw them as such in the graph. The junction structure is now ready and the elements can be connected.
+
+7. Connect the port of all elements found at step 1 with the `0-junctions` of the corresponding potential or potential differences (mechanical: `1-junctions` of the corresponding flows or flow differences).
+
+8. Simplify the resulting graph by applying the following simplification rules (Figure 18):
+
+   * A junction between two bonds can be left out, if the bonds have a ‘through’ power direction (one bond incoming, the other outgoing).
+
+   * A bond between two the same junctions can be left out, and the junctions can join into one junction.
+
+   * Two separately constructed identical potential or flow differences can join into one potential or flow difference.
+
+We will illustrate these steps with a concrete example consisting of an  (Figure 19).
+
+
+Project outline
+---------------
+
+In this project, we create a bond graph model of a hoisting device consisting of an electromotor fed by electric mains, a cable drum and a load (:numref:`fig_dtp_cp_bondgraphproject_schematic`).
+
+.. _fig_dtp_cp_bondgraphproject_schematic:
+
+.. figure:: _static/schematic.png
    :align: center
    :width: 50%
 
-   Full Bond Graph muscle model.
+   Sketch of the hoisting device.
 
+The mains is modelled as an ideal voltage source. At the electromotor, the inductance, electric resistance of the coils, bearing friction and rotary inertia are taken into account. The cable drum is the transformation from rotation to translation, which we consider as ideal. The load consists of a mass and the gravity force. Starting from the schematic in :numref:`fig_dtp_cp_bondgraphproject_model`, you would be able to construct a bond graph model using the steps mentioned above.
+
+.. _fig_dtp_cp_bondgraphproject_model:
+
+.. figure:: _static/model.png
+   :align: center
+   :width: 75%
+
+   Possible ideal-physical model augmented with the domain information of step 1.
+
+Additional info
+---------------
+
+* Voltage source is constant with given value of :math:`20` J.C\ :sup:`-1`.
+
+* Load and rotary inertia are :math:`1` J.s\ :sup:`2` .m\ :sup:`-2` and :math:`2` J.s\ :sup:`2` .rad\ :sup:`-2`, respectively.
+
+* Electric resistance is :math:`10000` J.s.C\ :sup:`-2` and bearing friction is :math:`10` J.s.rad\ :sup:`-2`.
 
 Simulation
 -------------------------------
 
-Using the Bond Graph model, now we can derive the equations and implement them in OpenCOR. The equations that we are looking for are: conservation of flow for *0*-junctions, conservation of energy for *1*-junctions, and constitutive relations for the springs, the damper and the mass. The input boundary condition for solving this system of ODEs is the contractile element or *SE* in the Bond Graph model. By running the simulation, you would be able to plot the force, velocity and displacement for the muscle in time.
+Using the bond graph model, now we can derive the equations and implement them in OpenCOR. The equations that we are looking for are: conservation of flow for `0-junctions`, conservation of energy for `1-junctions`, and constitutive relations for the elements. The input boundary condition for solving this system of ODEs is the voltage source or *SE* in the bond graph model. By running the simulation, you would be able to plot the potential and flow for all the elements in time.
 
 
 .. bibliography:: refs.bib
-   :style: unsrt

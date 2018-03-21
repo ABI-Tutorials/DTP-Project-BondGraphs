@@ -144,16 +144,16 @@
 \[\sum \mu. \upsilon=0\]</div>
 </div>
 <div class="section" id="bond-graph-elements">
-<h2>Bond Graph elements<a class="headerlink" href="#bond-graph-elements" title="Permalink to this headline">¶</a></h2>
+<h2>Bond graph elements<a class="headerlink" href="#bond-graph-elements" title="Permalink to this headline">¶</a></h2>
 <p>Bond graph formulation is a graphical notation for the set of linear constraint equations (the conservation laws), but the constitutive relations (to be addressed next) can be nonlinear.</p>
-<div class="section" id="r-element">
-<h3><cite>R-element</cite><a class="headerlink" href="#r-element" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="resistors">
+<h3><cite>Resistors</cite><a class="headerlink" href="#resistors" title="Permalink to this headline">¶</a></h3>
 <p>Energy <span class="math">\(\mu\)</span> can be dissipated by a resistor <cite>R</cite> in proportion to the flow <span class="math">\(\upsilon\)</span> with an empirical relation which can be a simple linear relation such as Equation 2 or a complex nonlinear relation:</p>
 <div class="math">
 \[\mu=\upsilon R\]</div>
 </div>
-<div class="section" id="c-element">
-<h3><cite>C-element</cite><a class="headerlink" href="#c-element" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="storage-elements">
+<h3><cite>Storage elements</cite><a class="headerlink" href="#storage-elements" title="Permalink to this headline">¶</a></h3>
 <p>Energy <span class="math">\(\mu\)</span> can be stored statically by a capacitor <cite>C</cite> without any loss. In the bond graph terminology, a one-port capacitor relates energy to the quantity <cite>q</cite> or time integral of flow by an empirical relation such as Equation 4. The <cite>C-element</cite> stores <cite>q</cite> by accumulating the net flow <span class="math">\(\upsilon\)</span> to the storage element:</p>
 <div class="math">
 \[\mu=\dfrac{q}{C}\]</div>
@@ -185,37 +185,63 @@
 <span id="fig-dtp-cp-bondgraphproject-causality-jun"></span><a class="reference internal image-reference" href="_images/causality_jun.png"><img alt="_images/causality_jun.png" src="_images/causality_jun.png" style="width: 50%;" /></a>
 <p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">Causality in four-port <cite>0-junction</cite> and <cite>1-junction</cite>.</span></p>
 </div>
-<p>This project was created as part of the Computational Physiology module in the <a class="reference external" href="http://medtech.org.nz">MedTech CoRE</a> Doctoral Training Programme.</p>
-<p>This project requires you to put together what you have learned in the tutorials to define a complete workflow which will create the Hill muscle model using the Bond Graph technique to simulate the human gait motion.</p>
-</div>
-</div>
-<div class="section" id="outline">
-<h2>Outline<a class="headerlink" href="#outline" title="Permalink to this headline">¶</a></h2>
-<p>The Hill muscle model showed in <a class="reference internal" href="#fig-dtp-cp-bondgraphproject-mechanical"><span class="std std-numref">Fig. 5</span></a> can be represented with the Bond Graph technique using <em>1</em>-junction for common velocity point, <em>0</em>-junction for common force point, a tension source <em>SE</em> for the contractile tension, a resistor <em>R</em> for the mechanical damper, two capacitors <em>C</em> for springs, and a mass <em>I</em> representing the muscle mass.</p>
-<p>In this project we create the Hill muscle model using the Bond Graph technique.</p>
+<p>The full Bond Graph muscle model is shown in <a class="reference internal" href="#fig-dtp-cp-bondgraphproject-bondgraph"><span class="std std-numref">Fig. 5</span></a>.</p>
 <div class="figure align-center" id="id13">
-<span id="fig-dtp-cp-bondgraphproject-mechanical"></span><a class="reference internal image-reference" href="_images/mechanical-model.png"><img alt="_images/mechanical-model.png" src="_images/mechanical-model.png" style="width: 50%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">The Hill model with five basic elements: contractile element, <em>CE</em>; damping element, <span class="math">\(R_{1}\)</span>; series elastic element, <span class="math">\(C_{1}\)</span>; parallel elastic element, <span class="math">\(C_{2}\)</span>; and inertial element, <span class="math">\(I_{1}\)</span>.</span></p>
-</div>
-</div>
-<div class="section" id="tips-for-completing-the-project">
-<h2>Tips for completing the project<a class="headerlink" href="#tips-for-completing-the-project" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><em>Junctions:</em> <em>1</em>-junction and <em>0</em>-junction are the fundamental elements for building Bond Graph models from schematics. By identifying the junctions in the schematic we can come up with the network topology, which helps us to plug in the rest of the elements to the model.</li>
-<li><em>Contractile element:</em> The contractile element <em>CE</em> is the <strong>active</strong> element in an extrafusal motor unit. It corresponds to the role played by voltage in an electronic circuit. <em>CE</em> responds to motoneuron inputs by contracting. Thus, the tension <em>SE</em> that it produces always acts to try to shorten the muscle. <em>CE</em> is incapable to produce an extension force. Here, we assume the force is constant with given value of <span class="math">\(1\)</span> <em>J.m</em><sup>-1</sup>.</li>
-<li><em>Elastic elements:</em> A muscle when passively stretched exhibits an elastic restoring force that tends to return the muscle to its original length. In part this force is due to stretching the connective tissue that surrounds the muscle fibers. In part it may be due to stretching the tendons which terminate muscle tissue and attach it to the bone. There is a reason to believe that the muscle fibers themselves are at least partly elastic. It is this elastic restoring force that is represented by the elastic elements (springs) in the Hill model. It is not completely correct to assign these elements to any particular physical source, but we may regard the <span class="math">\(C_{1}\)</span> as being mostly due to the connective tissues and the <span class="math">\(C_{2}\)</span> as being primarily dominated by tendon fibers terminating specific motor units. We should note that <span class="math">\(C_{1}\)</span> and <span class="math">\(C_{2}\)</span> are functions of lengths and therefore are non-linear springs. However, in this project we assume they are constants with given value of <span class="math">\(20\)</span> <em>J.m</em><sup>-2</sup>.</li>
-<li><em>Damping element:</em> It is an empirical factor that muscle tension during contraction and the speed of the contraction are coupled to each other. Hill found that the relation between them follows a characteristic hyperbolic equation, now known as Hill&#8217;s equation. Similar to elastic elements, the damper coefficient <span class="math">\(R_{1}\)</span> is a function of the contraction speed, therefore is a nonlinear damper. However, in here we assume it is constant with given value of <span class="math">\(10\)</span> <em>J.s.m</em><sup>-2</sup>.</li>
-<li><em>Inertial element:</em> This element is representing the muscle mass. Here, we assume it is <span class="math">\(1\)</span> <em>J.s</em><sup>2</sup> <em>.m</em><sup>-2</sup>.</li>
-</ul>
-<p>The full Bond Graph muscle model is shown in <a class="reference internal" href="#fig-dtp-cp-bondgraphproject-bondgraph"><span class="std std-numref">Fig. 6</span></a>.</p>
-<div class="figure align-center" id="id14">
 <span id="fig-dtp-cp-bondgraphproject-bondgraph"></span><a class="reference internal image-reference" href="_images/bondgraph.png"><img alt="_images/bondgraph.png" src="_images/bondgraph.png" style="width: 50%;" /></a>
-<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">Full Bond Graph muscle model.</span></p>
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">Full bond graph model.</span></p>
 </div>
+<p>This project was created as part of the Computational Physiology module in the <a class="reference external" href="http://medtech.org.nz">MedTech CoRE</a> Doctoral Training Programme.</p>
+<p>This project requires you to put together what you have learned in the tutorials to define a complete workflow which will create the Hoisting device model using the Bond graph technique.</p>
+</div>
+</div>
+<div class="section" id="procedure">
+<h2>Procedure<a class="headerlink" href="#procedure" title="Permalink to this headline">¶</a></h2>
+<p>To generate a bond graph model starting from an ideal-physical model, a systematic method exist, which we will present here as a procedure. This procedure consists roughly of the identification of the domains and basic elements, the generation of the connection structure (called the junction structure), the placement of the elements, and possibly simplifying the graph. The procedure is different for the mechanical domain compared to the other domains. These differences are indicated between parenthesis. The reason is that elements need to be connected to difference variables or across variables. The potentials in the non-mechanical domains and the flows in the mechanical domains are the across variables we need.</p>
+<p>Step 1 and 2 concern the identification of the domains and elements.</p>
+<ol class="arabic simple">
+<li>Determine which physical domains exist in the system and identify all basic elements like <em>C</em>, <em>I</em>, <em>R</em>, <em>SE</em>, <em>SF</em>, <em>TF</em> and <em>GY</em>. Give every element a unique name to distinguish them from each other.</li>
+<li>Indicate in the ideal-physical model per domain a reference potential (reference flow with positive direction for the mechanical domains). Note that only the references in the mechanical domains have a direction.</li>
+</ol>
+<p>Steps 3 through 6 describe the generation of the connection structure (called the junction structure).</p>
+<ol class="arabic simple" start="3">
+<li>Identify all other potentials (mechanical domains: flows) and give them unique names.</li>
+<li>Draw these potentials (mechanical: flows), and not the references, graphically by <cite>0-junctions</cite> (mechanical: <cite>1-junctions</cite>). Keep if possible, the same layout as the IPM.</li>
+<li>Identify all potential differences (mechanical: flow differences) needed to connect the ports of all elements enumerated in step 1 to the junction structure. Give these differences a unique name, preferably showing the difference nature. The difference between  <span class="math">\(\mu\)</span><sub>1</sub> and <span class="math">\(\mu\)</span><sub>2</sub> can be indicated by <span class="math">\(\mu\)</span> <sub>12</sub>.</li>
+<li>Construct the potential differences using a <cite>1-junction</cite> (mechanical: flow differences with a <cite>0-junction</cite>) according to Figure 17, and draw them as such in the graph. The junction structure is now ready and the elements can be connected.</li>
+<li>Connect the port of all elements found at step 1 with the <cite>0-junctions</cite> of the corresponding potential or potential differences (mechanical: <cite>1-junctions</cite> of the corresponding flows or flow differences).</li>
+<li>Simplify the resulting graph by applying the following simplification rules (Figure 18):<ul>
+<li>A junction between two bonds can be left out, if the bonds have a ‘through’ power direction (one bond incoming, the other outgoing).</li>
+<li>A bond between two the same junctions can be left out, and the junctions can join into one junction.</li>
+<li>Two separately constructed identical potential or flow differences can join into one potential or flow difference.</li>
+</ul>
+</li>
+</ol>
+<p>We will illustrate these steps with a concrete example consisting of an  (Figure 19).</p>
+</div>
+<div class="section" id="project-outline">
+<h2>Project outline<a class="headerlink" href="#project-outline" title="Permalink to this headline">¶</a></h2>
+<p>In this project, we create a bond graph model of a hoisting device consisting of an electromotor fed by electric mains, a cable drum and a load (<a class="reference internal" href="#fig-dtp-cp-bondgraphproject-schematic"><span class="std std-numref">Fig. 6</span></a>).</p>
+<div class="figure align-center" id="id14">
+<span id="fig-dtp-cp-bondgraphproject-schematic"></span><a class="reference internal image-reference" href="_images/schematic.png"><img alt="_images/schematic.png" src="_images/schematic.png" style="width: 50%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">Sketch of the hoisting device.</span></p>
+</div>
+<p>The mains is modelled as an ideal voltage source. At the electromotor, the inductance, electric resistance of the coils, bearing friction and rotary inertia are taken into account. The cable drum is the transformation from rotation to translation, which we consider as ideal. The load consists of a mass and the gravity force. Starting from the schematic in <a class="reference internal" href="#fig-dtp-cp-bondgraphproject-model"><span class="std std-numref">Fig. 7</span></a>, you would be able to construct a bond graph model using the steps mentioned above.</p>
+<div class="figure align-center" id="id15">
+<span id="fig-dtp-cp-bondgraphproject-model"></span><a class="reference internal image-reference" href="_images/model.png"><img alt="_images/model.png" src="_images/model.png" style="width: 75%;" /></a>
+<p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">Possible ideal-physical model augmented with the domain information of step 1.</span></p>
+</div>
+</div>
+<div class="section" id="additional-info">
+<h2>Additional info<a class="headerlink" href="#additional-info" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Voltage source is constant with given value of <span class="math">\(20\)</span> J.C<sup>-1</sup>.</li>
+<li>Load and rotary inertia are <span class="math">\(1\)</span> J.s<sup>2</sup> .m<sup>-2</sup> and <span class="math">\(2\)</span> J.s<sup>2</sup> .rad<sup>-2</sup>, respectively.</li>
+<li>Electric resistance is <span class="math">\(10000\)</span> J.s.C<sup>-2</sup> and bearing friction is <span class="math">\(10\)</span> J.s.rad<sup>-2</sup>.</li>
+</ul>
 </div>
 <div class="section" id="simulation">
 <h2>Simulation<a class="headerlink" href="#simulation" title="Permalink to this headline">¶</a></h2>
-<p>Using the Bond Graph model, now we can derive the equations and implement them in OpenCOR. The equations that we are looking for are: conservation of flow for <em>0</em>-junctions, conservation of energy for <em>1</em>-junctions, and constitutive relations for the springs, the damper and the mass. The input boundary condition for solving this system of ODEs is the contractile element or <em>SE</em> in the Bond Graph model. By running the simulation, you would be able to plot the force, velocity and displacement for the muscle in time.</p>
+<p>Using the bond graph model, now we can derive the equations and implement them in OpenCOR. The equations that we are looking for are: conservation of flow for <cite>0-junctions</cite>, conservation of energy for <cite>1-junctions</cite>, and constitutive relations for the elements. The input boundary condition for solving this system of ODEs is the voltage source or <em>SE</em> in the bond graph model. By running the simulation, you would be able to plot the potential and flow for all the elements in time.</p>
 </div>
 </div>
 
@@ -231,15 +257,16 @@
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
 <li><a class="reference internal" href="#units">Units</a></li>
 <li><a class="reference internal" href="#formulation">Formulation</a></li>
-<li><a class="reference internal" href="#bond-graph-elements">Bond Graph elements</a><ul>
-<li><a class="reference internal" href="#r-element"><cite>R-element</cite></a></li>
-<li><a class="reference internal" href="#c-element"><cite>C-element</cite></a></li>
+<li><a class="reference internal" href="#bond-graph-elements">Bond graph elements</a><ul>
+<li><a class="reference internal" href="#resistors"><cite>Resistors</cite></a></li>
+<li><a class="reference internal" href="#storage-elements"><cite>Storage elements</cite></a></li>
 <li><a class="reference internal" href="#i-element"><cite>I-element</cite></a></li>
 <li><a class="reference internal" href="#causality">Causality</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#outline">Outline</a></li>
-<li><a class="reference internal" href="#tips-for-completing-the-project">Tips for completing the project</a></li>
+<li><a class="reference internal" href="#procedure">Procedure</a></li>
+<li><a class="reference internal" href="#project-outline">Project outline</a></li>
+<li><a class="reference internal" href="#additional-info">Additional info</a></li>
 <li><a class="reference internal" href="#simulation">Simulation</a></li>
 </ul>
 </li>

@@ -18,7 +18,7 @@ This project requires you to put together what you have learned in the tutorials
 
    Sketch of the hoisting device.
 
-The mains is modelled as an ideal voltage source. At the electromotor, the inductance, electric resistance of the coils, bearing friction and rotary inertia are taken into account. The cable drum is the transformation from rotation to translation, which we consider as ideal. The load consists of a mass and the gravity force. Starting from the schematic in :numref:`fig_dtp_cp_bondgraphproject_model`, you would be able to construct a bond graph model using the steps mentioned above.
+The mains is modelled as an ideal voltage source. At the electromotor, the inductance, electric resistance of the coils, bearing friction and rotary inertia are taken into account. The cable drum is the transformation from rotation to translation, which we consider as ideal. The load consists of a mass and the gravity force. Starting from the schematic in :numref:`fig_dtp_cp_bondgraphproject_model`, you would be able to construct a bond graph model using the steps mentioned before.
 
 .. _fig_dtp_cp_bondgraphproject_model:
 
@@ -26,7 +26,7 @@ The mains is modelled as an ideal voltage source. At the electromotor, the induc
    :align: center
    :width: 75%
 
-   Possible ideal-physical model augmented with the domain information of step 1.
+   Possible ideal-physical model augmented with the domain information.
 
 Additional info
 ---------------

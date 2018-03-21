@@ -13,25 +13,15 @@ The first key idea, based on recognising that energy and power are the only quan
 Units
 -----
 
-Many physical systems can be described by a driving *potential* expressed as Joules per unit of some quantity, and a *flow* expressed as that quantity per second. The quantity could be coulomb, meters, moles, *etc.* in different physical systems. The power is always the product of the driving force and the flow expressed as Joules per second. The seven units of the SI system under the newly proposed definitions are now based on constants that are consistent with the use of Joules and seconds (together covering energy and power), metres, moles, entropy, coulombs and candela. Table~\ref{units} displays the bond graph concepts in the fluid mechanics domain.
+Many physical systems can be described by a driving *potential* expressed as Joules per unit of some quantity, and a *flow* expressed as that quantity per second. The quantity could be coulomb, meters, moles, *etc.* in different physical systems. The power is always the product of the driving force and the flow expressed as Joules per second. The seven units of the SI system under the newly proposed definitions are now based on constants that are consistent with the use of Joules and seconds (together covering energy and power), metres, moles, entropy, coulombs and candela. :numref:`fig_dtp_cp_bondgraphproject_table` displays the bond graph concepts in different energy domains.
 
-+------------+--------------------------+--------------------------+----------------------------+------------------------------+--------------------------+---------------------------+
-|            | Electrical Circuit       | Solid Mechanics          | Fluid Mechanics            | Biochemical Reaction         | HeatFlow                 | Electro-magnetics         |
-+============+==========================+==========================+============================+==============================+==========================+===========================+
-| Potential  | J.C :sup:`-1` (V)        | J.m :sup:`-1` (N)        | J.m :sup:`-3` (Pa)         | J.mol :sup:`-1` (G)          | J.e :sup:`-1` (K)        | J.cd :sup:`-1`            |
-+------------+--------------------------+--------------------------+----------------------------+------------------------------+--------------------------+---------------------------+
-| Quantity   | C                        | m                        | m :sup:`3`                 | mol                          | e                        | cd                        |
-+------------+--------------------------+--------------------------+----------------------------+------------------------------+--------------------------+---------------------------+
-| Flow       | C.s :sup:`-1`            | m.s :sup:`-1`            | m :sup:`3`.s :sup:`-1`     | mol.s :sup:`-1`              | e.s :sup:`-1`            | cd.s :sup:`-1`            |
-+------------+--------------------------+--------------------------+----------------------------+------------------------------+--------------------------+---------------------------+
-| Momentum   | J.s.C :sup:`-1`          | J.s.m :sup:`-1`          | J.s.m :sup:`-3`            | J.s.mol :sup:`-1`            | J.s.e :sup:`-1`          | J.s.cd :sup:`-1`          |
-+------------+--------------------------+--------------------------+----------------------------+------------------------------+--------------------------+---------------------------+
-| Compliance | C :sup:`2`.J :sup:`-1`   | m :sup:`2`.J :sup:`-1`   | m :sup:`6`.J :sup:`-1`     | mol :sup:`2`.J :sup:`-1`     | e :sup:`2`.J :sup:`-1`   | cd :sup:`2`.J :sup:`-1`   |
-+------------+--------------------------+--------------------------+----------------------------+------------------------------+--------------------------+---------------------------+
-| Resistance | J.s.C :sup:`-2`          | J.s.m :sup:`-2`          | J.s.m :sup:`-6`            | J.s.mol :sup:`-2`            | J.s.e :sup:`-2`          | J.s.cd :sup:`-2`          |
-+------------+--------------------------+--------------------------+----------------------------+------------------------------+--------------------------+---------------------------+
-| Inductance | J.s :sup:`2`.C :sup:`-2` | J.s :sup:`2`.m :sup:`-2` | J.s :sup:`2`.m :sup:`-6`   | J.s :sup:`2`.mol :sup:`-2`   | J.s :sup:`2`.e :sup:`-2` | J.s :sup:`2`.cd :sup:`-2` |
-+------------+--------------------------+--------------------------+----------------------------+------------------------------+--------------------------+---------------------------+
+.. _fig_dtp_cp_bondgraphproject_table:
+
+.. figure:: _static/table.png
+   :align: center
+   :width: 75%
+
+   Power and energy variables in various energy domains.
 
 Formulation
 -----------
@@ -46,52 +36,26 @@ In bond graph formulation, there are four basic variables. These variables for d
 
    Representation of energy bond.
 
-There are also the concept of `0-junction` and `1-junction` for conservation laws. The `0-junction` defines a common potential :math:`\mu` which ensures that the potential is identical at each port and imposes mass conservation constraint based on :math:`\upsilon`. The `1-junction` defines a common flow :math:`\upsilon` which ensures that the flow is identical at each port and imposes energy conservation constraint based on :math:`\mu`. Since sum of the flows is zero with :math:`\mu` constant for `0-junction` and sum of the potentials is zero with :math:`\upsilon` constant for `1-junction`, the transmission of power through junction is conserved for both kinds of junctions, that is:
-
-.. math::
-
-   \sum \mu. \upsilon=0
-
 Bond graph elements
 -------------------
 
-Bond graph formulation is a graphical notation for the set of linear constraint equations (the conservation laws), but the constitutive relations (to be addressed next) can be nonlinear.
+Bond graph formulation is a graphical notation for the set of linear constraint equations (the conservation laws), but the constitutive relations can be nonlinear.
 
-`Resistors`
-~~~~~~~~~~~
+The constitutive equations of the bond graph elements are introduced via examples from the electrical and mechanical domains. The nature of the constitutive equations lay demands on the causality of the connected bonds. Bond graph elements are drawn as letter combinations (mnemonic codes) indicating the type of element. The bond graph elements are the following:
 
-Energy :math:`\mu` can be dissipated by a resistor `R` in proportion to the flow :math:`\upsilon` with an empirical relation which can be a simple linear relation such as Equation 2 or a complex nonlinear relation:
+* `C`: static storage element, `e.g.` capacitor (stores charge), spring (stores displacement).
 
-.. math::
+* `I`: dynamic storage element, `e.g.` inductor (stores flux linkage), mass (stores momentum).
 
-   \mu=\upsilon R
+* `R`: resistor dissipating free energy, `e.g.` electric resistor, mechanical friction.
 
-`Storage elements`
-~~~~~~~~~~~~~~~~~~
+* `SE` and `SF`: sources, `e.g.` electric mains (voltage source), gravity (force source), pump (flow source).
 
-Energy :math:`\mu` can be stored statically by a capacitor `C` without any loss. In the bond graph terminology, a one-port capacitor relates energy to the quantity `q` or time integral of flow by an empirical relation such as Equation 4. The `C-element` stores `q` by accumulating the net flow :math:`\upsilon` to the storage element:
+* `TF`: transformer, `e.g.` an electric transformer, toothed wheels, lever.
 
-.. math::
+* `GY`: gyrator, `e.g.` electromotor, centrifugal pump.
 
-   \mu=\dfrac{q}{C}
-
-.. math::
-
-   \dot q=\upsilon
-
-`I-element`
-~~~~~~~~~~~
-
-Energy :math:`\mu` can be stored dynamically by an inductor `I` without any loss. In bond graph formulation, a one-port inductor relates flow to the momentum `p` or time integral of potential by an empirical relation such as Equation 7. The `I-element` stores `p` by accumulating the net potential :math:`\mu` to the storage element.
-
-.. math::
-
-   \upsilon=\dfrac{p}{I}
-
-.. math::
-
-   \dot p=\mu
-
+* `0` and `1`: `0-junctions` and `1-junctions`, for ideal connecting two or more submodels.
 
 :numref:`fig_dtp_cp_bondgraphproject_tetra` shows the relation of the state variables to the constitutive relations.
 
@@ -102,6 +66,86 @@ Energy :math:`\mu` can be stored dynamically by an inductor `I` without any loss
    :width: 25%
 
    State variables and constitutive relations in the bond graph approach.
+
+Storage elements
+~~~~~~~~~~~~~~~~~~
+
+Storage elements store all kinds of free energy. As indicated above, there are two types of storage elements: `C-elements` and `I-elements`. In `C-elements`, like a capacitor or spring, the conserved quantity, `q`, is stored by accumulating the net flow, :math:`\upsilon`, to the storage element. This results in the differential equation:
+
+.. math::
+
+   \dot q=\upsilon
+
+which is called a balance equation, and forms a part of the constitutive equations of the storage element. In the other part of the constitutive equations, the state variable, `q`, is related to the potential:
+
+.. math::
+
+   \mu=\dfrac{q}{C}
+
+In `I–elements`, like an inductor or mass, the conserved quantity, `p`, is stored by accumulating the net potential, :math:`\mu`, to the storage element. The resulting differential equation is:
+
+.. math::
+
+   \dot p=\mu
+
+which is the balance equation. The element-specific part of the constitutive equations is:
+
+.. math::
+
+   \upsilon=\dfrac{p}{I}
+
+Resistors
+~~~~~~~~~
+
+Resistors, `R–elements`, dissipate free energy. Examples are dampers, frictions and electric resistors. The constitutive equation is an algebraic relation between the potential and flow.
+
+.. math::
+
+   \mu=\upsilon R
+
+Sources
+~~~~~~~
+
+Sources represent the interaction of a system with its environment. Examples are external forces, voltage and current sources, ideal motors, `etc.` Depending on the type of the imposed variable, these elements are drawn as `SE` or `SF`.
+
+Transformers
+~~~~~~~~~~~~
+
+An ideal transformer is represented by `TF` and is power continuous (`i.e.` no power is stored or dissipated). The transformation can within the same domain (toothed wheel, lever) or between different domains (electromotor, winch). The equations are:
+
+.. math::
+
+   \mu_1=n \mu_2
+
+.. math::
+
+   \upsilon_2=n \upsilon_1
+
+Potentials are transduced to potentials and flows to flows. The parameter `n` is the transformer ratio. Due to the power continuity, only one dimensionless parameter, `n`, is needed to describe both the potential transduction and the flow transduction. The parameter `n` is unambiguously defined as follows: :math:`\mu`:sub:`1` and :math:`\upsilon`:sub:`1` belong to the bond pointing towards the `TF`. If `n` is not constant, the transformer is a modulated transformer, a `MTF`. The transformer ratio now becomes an input signal to the `MTF`.
+
+Gyrators
+~~~~~~~~
+
+An ideal `gyrator` is represented by `GY`, and is also power continuous (`i.e.` no power is stored or is dissipated. Examples are an electromotor, a pump and a turbine. Real-life realisations of gyrators are mostly transducers representing a domain-transformation. The equations are:
+
+  .. math::
+
+     \mu_1=r \upsilon_2
+
+  .. math::
+
+     \mu_2=r \upsilon_1
+
+The parameter `r` is the `gyrator ratio`, and due to the power continuity, only one parameter to describe both equations. No further definition is needed since the equations are symmetric (it does not matter which bond points inwards, only that one bond points towards and the other points form the gyrator). `r` has a physical dimension, since `r` is a relation between effort and flow (it has the same dimension as the parameter of the `R-element`). If `r` is not constant, the gyrator is a `modulated gyrator`, a `MGY`.
+
+Junctions
+~~~~~~~~~
+
+Junctions couple two or more elements in a power continuous way: there is no energy storage or dissipation in a junction. Examples are a series connection or a parallel connection in an electrical network, a fixed coupling between parts of a mechanical system.
+
+The `0-junction` represents a node at which all potentials of the connecting bonds are equal. An example is a parallel connection in an electrical circuit. Due to the power continuity, the sum of the flows of the connecting bonds is zero, considering the sign. The power direction (`i.e.` direction of the arrow) determines the sign of the flows: all inward pointing bonds get a plus and all outward pointing bonds get a minus. This summation is the Kirchhoff current law in electrical networks: all currents connecting to one node sum to zero, considering their signs: all inward currents are positive and all outward currents are negative. We can depict the `0-junction` as the representation of a potential variable, and often the `0-junction` will be interpreted as such. The `0-junction` is more than the (generalised) Kirchhoff current law, namely also the equality of the potentials (like electrical voltages being equal at a parallel connection).
+
+The `1-junction` is the dual form of the `0-junction` (roles of potential and flow are exchanged). The `1-junction` represents a node at which all flows of the connecting bonds are equal. An example is a series connection in an electrical circuit. The potentials sum to zero, as a consequence of the power continuity. Again, the power direction (`i.e.` direction of the arrow) determines the sign of the potentials: all inward pointing bonds get a plus and all outward pointing bonds get a minus. This summation is the Kirchhoff voltage law in electrical networks: the sum of all voltage differences along one closed loop (a mesh) is zero. In the mechanical domain, the `1–junction` represents a force balance (also called the principle of d’Alembert), and is a generalisation of Newton’s third law, action = – reaction). Just as with the `0–junction`, the `1–junction` is more than these summations, namely the equality of the flows. Therefore, we can depict the `1–junction` as the representation of a flow variable, and often the `1-junction` will be interpreted as such.
 
 Causality
 ~~~~~~~~~
@@ -126,25 +170,10 @@ In the bond graph approach, junctions interconnect the corresponding elements an
 
    Causality in four-port `0-junction` and `1-junction`.
 
-The full Bond Graph muscle model is shown in :numref:`fig_dtp_cp_bondgraphproject_bondgraph`.
-
-.. _fig_dtp_cp_bondgraphproject_bondgraph:
-
-.. figure:: _static/bondgraph.png
-    :align: center
-    :width: 50%
-
-    Full bond graph model.
-
-
-This project was created as part of the Computational Physiology module in the `MedTech CoRE <http://medtech.org.nz>`_ Doctoral Training Programme.
-
-This project requires you to put together what you have learned in the tutorials to define a complete workflow which will create the Hoisting device model using the Bond graph technique.
-
 Procedure
 ---------
 
-To generate a bond graph model starting from an ideal-physical model, a systematic method exist, which we will present here as a procedure. This procedure consists roughly of the identification of the domains and basic elements, the generation of the connection structure (called the junction structure), the placement of the elements, and possibly simplifying the graph. The procedure is different for the mechanical domain compared to the other domains. These differences are indicated between parenthesis. The reason is that elements need to be connected to difference variables or across variables. The potentials in the non-mechanical domains and the flows in the mechanical domains are the across variables we need.
+To generate a bond graph model starting from an ideal-physical model (IPM), a systematic method exist, which we will present here as a procedure. This procedure consists roughly of the identification of the domains and basic elements, the generation of the connection structure (called the junction structure), the placement of the elements, and possibly simplifying the graph. The procedure is different for the mechanical domain compared to the other domains. These differences are indicated between parenthesis. The reason is that elements need to be connected to difference variables or across variables. The potentials in the non-mechanical domains and the flows in the mechanical domains are the across variables we need.
 
 Step 1 and 2 concern the identification of the domains and elements.
 
@@ -160,11 +189,11 @@ Steps 3 through 6 describe the generation of the connection structure (called th
 
 5. Identify all potential differences (mechanical: flow differences) needed to connect the ports of all elements enumerated in step 1 to the junction structure. Give these differences a unique name, preferably showing the difference nature. The difference between  :math:`\mu`:sub:`1` and :math:`\mu`:sub:`2` can be indicated by :math:`\mu` :sub:`12`.
 
-6. Construct the potential differences using a `1-junction` (mechanical: flow differences with a `0-junction`) according to Figure 17, and draw them as such in the graph. The junction structure is now ready and the elements can be connected.
+6. Construct the potential differences using a `1-junction` (mechanical: flow differences with a `0-junction`) and draw them as such in the graph. The junction structure is now ready and the elements can be connected.
 
 7. Connect the port of all elements found at step 1 with the `0-junctions` of the corresponding potential or potential differences (mechanical: `1-junctions` of the corresponding flows or flow differences).
 
-8. Simplify the resulting graph by applying the following simplification rules (Figure 18):
+8. Simplify the resulting graph by applying the following simplification rules:
 
    * A junction between two bonds can be left out, if the bonds have a ‘through’ power direction (one bond incoming, the other outgoing).
 
@@ -172,13 +201,15 @@ Steps 3 through 6 describe the generation of the connection structure (called th
 
    * Two separately constructed identical potential or flow differences can join into one potential or flow difference.
 
-We will illustrate these steps with a concrete example consisting of an  (Figure 19).
+We will illustrate these steps with a concrete example in the next section.
 
 
 Project outline
 ---------------
 
-In this project, we create a bond graph model of a hoisting device consisting of an electromotor fed by electric mains, a cable drum and a load (:numref:`fig_dtp_cp_bondgraphproject_schematic`).
+This project was created as part of the Computational Physiology module in the `MedTech CoRE <http://medtech.org.nz>`_ Doctoral Training Programme.
+
+This project requires you to put together what you have learned in the tutorials to define a complete workflow which will create a hoisting device model using the bond graph technique. The hoisting device consists of an electromotor fed by electric mains, a cable drum and a load (:numref:`fig_dtp_cp_bondgraphproject_schematic`).
 
 .. _fig_dtp_cp_bondgraphproject_schematic:
 
@@ -206,6 +237,8 @@ Additional info
 * Load and rotary inertia are :math:`1` J.s\ :sup:`2` .m\ :sup:`-2` and :math:`2` J.s\ :sup:`2` .rad\ :sup:`-2`, respectively.
 
 * Electric resistance is :math:`10000` J.s.C\ :sup:`-2` and bearing friction is :math:`10` J.s.rad\ :sup:`-2`.
+
+* Gyrator ratio and transformer ratio are :math:`3` J.s.C\ :sup:`-1` .m\ :sup:`-1` and :math:`5`, respectively.
 
 Simulation
 -------------------------------
